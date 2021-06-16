@@ -61,15 +61,26 @@ function cityToUpdate(desire, array){
     }
 }
 
-function table(cities){
+function table(array){
     let table=[]
-    for(let count=0; count<cities.length;count++){
-        table.push({'Name': cities[count],'Temperature':'','Maximum':'','Minimum':''})
+    for(let count=0; count<array.length;count++){
+        table.push({'Name': array[count],'Temperature':'','Maximum':'','Minimum':''})
     }
     return table
 }
 
+function apiCalls(array){
+    if(array.length===0){
+        return false
+    } else{
+        let apis=[]
+        for(let counter=0; counter<array.length;counter++){
+            apis.push('https://api.openweathermap.org/data/2.5/weather?q='+array[counter]+'&APPID=23a44f16645fc81dd874a41b96552643')
+        }
+        return apis
+    }
 
+}
 
 
 
@@ -78,5 +89,6 @@ module.exports = {
     getTitle,
     inputAction,
     cityToUpdate,
-    table
+    table,
+    apiCalls
 }
