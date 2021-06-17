@@ -1,15 +1,8 @@
 //importing libraries
 const axios = require('axios');
 
-//updates the cities in fuction of the user's inputs
-function changeCity(desire, location, array,){
-    if(desire==='Add city'){
-        array.push(location)  
-    }else if(desire==='Delete city'){
-        array.splice(array.indexOf(location), 1)
-    }
-    return array
-}
+//bringin functions from other files
+const {apiCalls} = require('./view')
 
 //function that makes the calls to update the information
 async function makeRequest(link) {
@@ -25,10 +18,35 @@ async function makeRequest(link) {
     return respond
 }
 
+//function that updates de data to print in table according to user's answers
+async function updateTable(move, places, place, info){
+    end=0
+    if(move==='Add city'){
+        places.push(place)
+        let calls=apiCalls(place)
+        await makeRequest(calls).then(function(value) {
+            info.push(value)
+        })
+    }else if(move==='Delete city'){
+        places.splice(places.indexOf(place), 1)
+        info.splice(places.indexOf(place), 1)
+
+    }else if(move==='Update city'){
+        let index=places.indexOf(place)
+        let calls=apiCalls(place)
+        await makeRequest(calls).then(function(value) {
+            info[index]=value
+        })   
+    }else if(move==='Stop program'){
+        end=1
+    }
+
+    return [places, info, end]
+
+}
 
 
 //export modules out of the file
 module.exports = {
-    changeCity,
-    makeRequest
+    updateTable
 }
