@@ -61,14 +61,16 @@ function cityToUpdate(desire, array){
     }
 }
 
-function table(array){
-    let table=[]
-    for(let count=0; count<array.length;count++){
-        table.push({'Name': array[count],'Temperature':'','Maximum':'','Minimum':''})
+function table(array, locations){
+    let print=[]
+    for(let value=0; value<array.length;value++){
+        print.push({'Name': locations[value],'Temperature':array[value].temp,'Maximum':array[value].temp_max,'Minimum':array[value].temp_min})
     }
-    return table
+    return print
 }
 
+
+//function that builds the link's to call
 function apiCalls(array){
     if(array.length===0){
         return false
