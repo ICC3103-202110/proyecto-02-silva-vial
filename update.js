@@ -12,22 +12,16 @@ function changeCity(desire, location, array,){
 }
 
 //function that makes the calls to update the information
-async function makeRequest(array) {
+async function makeRequest(link) {
 
-    let config=[]
-    for(let count=0; count<array.length;count++){
-        config.push({
-            method: 'get',
-            url: array[count]
-        })
+    const config={
+        method: 'get',
+        url: link
     }
    
-    respond=[]
-    for(let counter=0; counter<config.length;counter++){
-        let call= await axios(config[counter])
-        respond.push(call.data.main)
-    }
-    //print(respond,places)
+    let call= await axios(config)
+    let respond= call.data.main
+    
     return respond
 }
 

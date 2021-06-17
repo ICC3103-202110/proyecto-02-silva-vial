@@ -34,7 +34,7 @@ function inputAction(array){
             type:'list',
             name:'action',
             message: 'Select action',
-            choices:['Add city', 'Update city', 'Delete city']
+            choices:['Add city', 'Update city', 'Delete city','Stop program']
         }])
     }
 }
@@ -71,17 +71,8 @@ function table(array, locations){
 
 
 //function that builds the link's to call
-function apiCalls(array){
-    if(array.length===0){
-        return false
-    } else{
-        let apis=[]
-        for(let counter=0; counter<array.length;counter++){
-            apis.push('https://api.openweathermap.org/data/2.5/weather?q='+array[counter]+'&APPID=23a44f16645fc81dd874a41b96552643')
-        }
-        return apis
-    }
-
+function apiCalls(name){
+    return 'https://api.openweathermap.org/data/2.5/weather?q='+name+'&APPID=23a44f16645fc81dd874a41b96552643'
 }
 
 
